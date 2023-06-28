@@ -62,7 +62,7 @@ model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 ## Train the model
-model.fit(x_train, y_train, epochs=1, batch_size=32)
+model.fit(x_train, y_train, epochs=10, batch_size=32)
 print('Modify test images: Start!')
 
 # Evaluate the model
@@ -79,7 +79,7 @@ test_acc_fgsm = tf.metrics.SparseCategoricalAccuracy()
 y_pred = model(x_test)
 test_acc_clean(y_test, y_pred)
 
-x_fgm = fast_gradient_method(model, x_test, 0.3, np.inf)
+x_fgm = fast_gradient_method(model, x_test, 0.07, np.inf)
 y_pred_fgm = model(x_fgm)
 test_acc_fgsm(y_test, y_pred_fgm)
 
